@@ -1,0 +1,77 @@
+@page
+@model RazorApp.Pages.Market.GetMarketByIdModel
+@{
+    ViewData["Title"] = "Market Details";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Стили для страницы с деталями категории */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .category-info {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .category-info h2 {
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .category-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .category-info li {
+            margin-bottom: 10px;
+        }
+
+        .btn-back {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+
+        @if (Model.Market != null)
+        {
+            <div class="category-info">
+                <h2>Market Information</h2>
+                <ul>
+                    <li><strong>ID:</strong> @Model.Market.Id</li>
+                    <li><strong>Market Name:</strong> @Model.Market.MarketName</li>
+                    <li><strong>Description:</strong> @Model.Market.Description</li>
+                    <li><strong>Address:</strong> @Model.Market.Address</li>
+                    <li><strong>Created At:</strong> @Model.Market.CreateAt.ToString("yyyy-MM-dd HH:mm:ss")</li>
+                    <li><strong>Updated At:</strong> @Model.Market.UpdateAt.ToString("yyyy-MM-dd HH:mm:ss")</li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">Market not found.</div>
+        }
+
+        <a asp-page="/Market/GetMarkets" class="btn btn-secondary btn-back">Back to GetMarkets</a>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

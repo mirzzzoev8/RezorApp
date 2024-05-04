@@ -1,0 +1,113 @@
+@page
+@model RazorApp.Pages.Category.GetCategoriesModel
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .category-id {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="btn-container">
+        <a href="/Category/CreateCategory" class="btn btn-primary">Add Category</a>
+    </div>
+
+    <form method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="Filter.CategoryName" placeholder="Search by Category Name">
+        </div>
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+
+    <ul>
+        @foreach (var category in Model.Categories)
+        {
+            <li>
+                <div>
+                    <span class="category-id">ID: @category.Id</span><br />
+                    <span><strong>Category Name:</strong> @category.CategoryName</span><br />
+                    <span>Created At: @category.CreateAt.ToString("yyyy-MM-dd HH:mm:ss")</span><br />
+                    <span>Updated At: @category.UpdateAt.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                </div>
+                <div class="btn-container">
+                    <a href="/Category/GetCategoryById?id=@category.Id" class="btn btn-info">View</a>
+                    <a asp-page="/Category/UpdateCategory" asp-route-id="@category.Id" class="btn btn-primary">Update</a>
+                    <a href="/Category/DeleteCategory?id=@category.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </li>
+        }
+    </ul>
+
+    <!-- Pagination -->
+    @if (Model.TotalPages > 1)
+    {
+        <div class="pagination-container">
+            <nav>
+                <ul class="pagination">
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(Model.Filter.PageNumber == i ? "active" : "")">
+                            <a class="page-link" asp-page="./GetCategories" asp-route-PageNumber="@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+</body>
+</html>

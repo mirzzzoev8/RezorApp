@@ -1,0 +1,43 @@
+@page
+@model RazorApp.Pages.Market.UpdateMarketModel
+@{
+    ViewData["Title"] = "Update Market";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>@ViewData["Title"]</h1>
+
+        <form method="post">
+            <input type="hidden" asp-for="Market.Id" />
+
+            <div class="form-group">
+                <label asp-for="Market.MarketName">Market Name:</label>
+                <input asp-for="Market.MarketName" class="form-control"/>
+                <span asp-validation-for="Market.MarketName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Market.Description">Description:</label>
+                <input asp-for="Market.Description" class="form-control"/>
+                <span asp-validation-for="Market.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Market.Address">Address:</label>
+                <input asp-for="Market.Address" class="form-control"/>
+                <span asp-validation-for="Market.Address" class="text-danger"></span>
+            </div>
+
+            <!-- Добавьте другие поля DTO здесь, если необходимо -->
+
+            <button type="submit" class="btn btn-primary">Update Market</button>
+            <a asp-page="/Market/GetMarkets" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

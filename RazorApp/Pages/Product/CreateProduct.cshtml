@@ -1,0 +1,81 @@
+@page
+@model CreateProductModel
+@{
+    ViewData["Title"] = "Create New Product";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title style="text-align: center">@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Стили для страницы создания новой категории */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-cancel {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="form-container">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="ProductDto.ProductName">Product Name:</label>
+                <input asp-for="ProductDto.ProductName" class="form-control"/>
+                <span asp-validation-for="ProductDto.ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductDto.Description">Description:</label>
+                <input asp-for="ProductDto.Description" class="form-control"/>
+                <span asp-validation-for="ProductDto.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductDto.Price">Price:</label>
+                <input asp-for="ProductDto.Price" class="form-control"/>
+                <span asp-validation-for="ProductDto.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductDto.MarketId">Market Id:</label>
+                <input asp-for="ProductDto.MarketId" class="form-control"/>
+                <span asp-validation-for="ProductDto.MarketId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductDto.CategoryId">Category Id:</label>
+                <input asp-for="ProductDto.CategoryId" class="form-control"/>
+                <span asp-validation-for="ProductDto.CategoryId" class="text-danger"></span>
+            </div>
+
+            <!-- Добавьте другие поля DTO здесь, если они есть -->
+
+            <button type="submit" class="btn btn-primary">Create Product</button>
+            <a asp-page="/Product/GetProducts" class="btn btn-secondary btn-cancel">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
